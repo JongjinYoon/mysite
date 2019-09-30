@@ -53,7 +53,7 @@
 					<c:if test="${authUser != null}">
 					<c:if test="${no == vo.no }">
 						<a href="${pageContext.servletContext.contextPath }/board/write/${vo.gNo }/${vo.oNo }/${vo.depth }">답글</a>
-						<a href="${pageContext.servletContext.contextPath }/board/list">글목록</a>
+						<a href="${pageContext.servletContext.contextPath }/board/list/${curPage}">글목록</a>
 					</c:if>
 					</c:if>
 					</c:forEach>

@@ -39,14 +39,13 @@
 									<td onclick='event.cancelBubble=true;'>${vo.title }</td>
 								</c:when>
 								<c:when test="${vo.depth > 0 }">
-									<td style='padding-left:${50*vo.depth }px'><img
-										src="${pageContext.servletContext.contextPath }/assets/images/reply.png" />
-										<a
-										href="${pageContext.servletContext.contextPath }/board/view/${vo.no }">${vo.title }</a></td>
+									<td style='padding-left:${50*vo.depth }px'>
+									<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png" />
+									<a href="${pageContext.servletContext.contextPath }/board/view/${vo.no }/${curPage}">${vo.title }</a></td>
 								</c:when>
 								<c:when test="${vo.depth eq 0 }">
-									<td style='padding-left:${50*vo.depth }px'><a
-										href="${pageContext.servletContext.contextPath }/board/view/${vo.no }">${vo.title }</a></td>
+									<td style='padding-left:${50*vo.depth }px'>
+									<a href="${pageContext.servletContext.contextPath }/board/view/${vo.no }/${curPage}">${vo.title }</a></td>
 								</c:when>
 							</c:choose>
 

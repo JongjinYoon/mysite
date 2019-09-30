@@ -20,6 +20,7 @@ public class UserController {
 	@RequestMapping("/checkemail")
 	public JSONResult checkEmail(@RequestParam(value="email", required = true, defaultValue = "") String email) {		
 		Boolean exist = userService.existUser(email);
+		System.out.println(exist);
 		return JSONResult.success(exist);
 	}
 }

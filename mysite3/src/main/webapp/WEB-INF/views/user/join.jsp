@@ -25,11 +25,11 @@
 
 			// ajax 통신
 			$.ajax({
-				url : "${pageContext.servletContext.contextPath }/api/user/checkemail?email=" + email,
-				type : "get",
-				dataType : "json",
-				data : "",
-				success : function(response) {
+				url: "${pageContext.servletContext.contextPath }/api/user/checkemail?email=" + email,
+				type: "get",
+				dataType: "json",
+				data: "",
+				success: function(response) {
 					if (response.result == "fail") {
 						console.error(response.message);
 						return;
@@ -45,7 +45,7 @@
 					$("#btn-check-email").hide();
 					$("#img-checked").show();
 				},
-				error : function(xhr, error){
+				error: function(xhr, error){
 					console.error("error:"+error);
 				}
 			});
@@ -61,10 +61,13 @@
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.servletContext.contextPath }/user/join">
 					<label class="block-label" for="name">이름</label> 
 					<input id="name" name="name" type="text" value=""> 
+					
 					<label class="block-label" for="email">이메일</label> 
-					<input id="input-email" name="email" type="text" value=""> 
+					<input id="input-email" name="email" type="text" value="">
+					 
 					<input id="btn-check-email" type="button" value="중복확인"> 
 					<img id="img-checked" style='width: 20px; display: none' src="${pageContext.servletContext.contextPath }/assets/images/check.png">
+					
 					<label class="block-label">패스워드</label> 
 					<input name="password" type="password" value="">
 

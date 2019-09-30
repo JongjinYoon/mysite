@@ -14,17 +14,16 @@ public class JSONResult {
 	}
 	
 	private JSONResult() {
-		
 	}
 	
 	private JSONResult(Object data) {
 		this.result = "success";
-		this.data = "data";
+		this.data = data;
 	}
 	
 	private JSONResult(String message) {
 		this.result = "fail";
-		this.message = "message";
+		this.message = message;
 	}
 	
 	public String getResult() {

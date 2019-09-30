@@ -25,7 +25,8 @@ public class BoardController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String index(Model model) {
-		List<BoardVo> list = boardService.getList();
+		
+		List<BoardVo> list = boardService.getList(0);
 		model.addAttribute("list", list);
 
 		return "board/list";
@@ -62,7 +63,7 @@ public class BoardController {
 		}
 		
 		List<BoardVo> list = boardService.getList((curPage - 1) * 5);
-		System.out.println(list);
+
 		model.addAttribute("authUser", authUser);
 		model.addAttribute("list", list);
 		model.addAttribute("startPage", startPage);
@@ -75,14 +76,15 @@ public class BoardController {
 		return "board/list";
 	}
 
-	@RequestMapping(value = "/view/{no}", method = RequestMethod.GET)
-	public String view(@PathVariable("no") Long no, HttpSession session, Model model) {
+	@RequestMapping(value = "/view/{no}/{curPage}", method = RequestMethod.GET)
+	public String view(@PathVariable("no") Long no,@PathVariable("curPage") int curPage, HttpSession session, Model model) {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		model.addAttribute("authUser", authUser);
 		boardService.update(no);
 		List<BoardVo> list = boardService.getList();
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
+		model.addAttribute("curPage", curPage);
 
 		return "board/view";
 	}
@@ -102,7 +104,7 @@ public class BoardController {
 		} else {
 			boardService.insert(vo);
 		}
-		return "redirect:/board/list";
+		return "redirect:/board/list/1";
 	}
 
 	@RequestMapping(value = "/write/{gNo}/{oNo}/{depth}", method = RequestMethod.GET)
@@ -133,7 +135,7 @@ public class BoardController {
 		} else {
 			boardService.delete(vo);
 		}
-		return "redirect:/board/list";
+		return "redirect:/board/list/1";
 	}
 	
 	@RequestMapping(value = "/modify/{no}", method = RequestMethod.GET)
@@ -147,6 +149,6 @@ public class BoardController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(@ModelAttribute BoardVo vo) {
 		boardService.update(vo);
-		return "redirect:/board/list";
+		return "redirect:/board/list/1";
 	}
 }
