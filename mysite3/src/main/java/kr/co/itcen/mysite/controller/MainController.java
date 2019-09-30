@@ -1,6 +1,9 @@
 package kr.co.itcen.mysite.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -10,7 +13,9 @@ import kr.co.itcen.mysite.vo.UserVo;
 public class MainController {
 
 	@RequestMapping({ "", "/main" })
-	public String index() {
+	public String index(HttpSession session, Model model) {
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		model.addAttribute("authUser", authUser);
 		return "main/index";
 	}
 	
