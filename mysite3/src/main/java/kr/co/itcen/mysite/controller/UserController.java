@@ -76,9 +76,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
-	public String update(@ModelAttribute UserVo vo) {
+	public String update(@ModelAttribute UserVo vo,HttpSession session, Model model) {
 		//@ModelAttribute는 addAttribute를 자동으로 해주는거
 		userService.update(vo);
+		session.setAttribute("authUser", vo);
 		return "redirect:/";
 	}
 	
