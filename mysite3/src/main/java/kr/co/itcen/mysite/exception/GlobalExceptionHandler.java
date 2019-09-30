@@ -1,6 +1,7 @@
 package kr.co.itcen.mysite.exception;
 
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletRequest;
