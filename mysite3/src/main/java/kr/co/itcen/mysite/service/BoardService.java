@@ -16,6 +16,10 @@ public class BoardService {
 	
 	public List<BoardVo> getList() {
 		return boardDao.getList();
+	}
+	
+	public List<BoardVo> getList(int page) {
+		return boardDao.getList(page);
 		
 	}
 	
@@ -28,13 +32,32 @@ public class BoardService {
 		boardDao.update(no);
 		
 	}
+	
+	public void update(BoardVo vo) {
+		boardDao.update(vo);
+		
+	}
+	
+	public void deleteUpdate(BoardVo vo) {
+		boardDao.deleteUpdate(vo);
+		
+	}
 
 	public void commentInsert(BoardVo vo) {
 		boardDao.commentInsert(vo);
 		
 	}
 
-	public void update(String gNo, String oNo) {
-		boardDao.update(Integer.parseInt(gNo),Integer.parseInt(oNo));
+	public void update(String gNo) {
+		boardDao.update(Integer.parseInt(gNo));
+	}
+
+	public void delete(BoardVo vo) {
+		
+		boardDao.delete(vo);
+	}
+
+	public int getCount() {
+		return boardDao.getCount();
 	}
 }

@@ -44,7 +44,6 @@
 										<a
 										href="${pageContext.servletContext.contextPath }/board/view/${vo.no }">${vo.title }</a></td>
 								</c:when>
-
 								<c:when test="${vo.depth eq 0 }">
 									<td style='padding-left:${50*vo.depth }px'><a
 										href="${pageContext.servletContext.contextPath }/board/view/${vo.no }">${vo.title }</a></td>
@@ -70,7 +69,7 @@
 					<ul>
 						<c:if test="${ curPage > 5 }">
 							<li><a
-								href="${pageContext.servletContext.contextPath }/board/${ blockStartNum - 1 }">◀</a></li>
+								href="${pageContext.servletContext.contextPath }/board/list/${ blockStartNum - 1 }">◀</a></li>
 						</c:if>
 						<c:forEach var="i" begin="${ blockStartNum }"
 							end="${ blockLastNum }">
@@ -83,14 +82,14 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="${pageContext.servletContext.contextPath }/board/${ i }">${ i }</a></li>
+										href="${pageContext.servletContext.contextPath }/board/list/${ i }">${ i }</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
 						<c:if test="${ lastPage > blockLastNum }">
 							<li><a
-								href="${pageContext.servletContext.contextPath }/board/${ blockLastNum + 1 }">▶</a></li>
+								href="${pageContext.servletContext.contextPath }/board/list/${ blockLastNum + 1 }">▶</a></li>
 						</c:if>
 					</ul>
 				</div>

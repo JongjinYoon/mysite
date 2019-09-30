@@ -35,7 +35,6 @@ public class GuestbookController {
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(@ModelAttribute GuestbookVo vo) {
-		
 		guestbookService.delete(vo);
 		return "redirect:/guestbook/list";
 	}

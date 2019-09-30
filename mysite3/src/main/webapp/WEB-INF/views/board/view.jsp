@@ -46,9 +46,8 @@
 					<c:forEach items='${list }' var='vo' varStatus='status'>
 									<c:if test='${no == vo.no && authUser.no == vo.userNo}'>
 										<a
-											href="${pageContext.servletContext.contextPath }/board/modifyform/${no }">글수정</a>
+											href="${pageContext.servletContext.contextPath }/board/modify/${no }">글수정</a>
 									</c:if>
-						
 					</c:forEach>
 					<c:forEach items='${list }' var='vo' varStatus='status'>
 					<c:if test="${authUser != null}">

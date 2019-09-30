@@ -17,7 +17,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.servletContext.contextPath }/board">
+				<form class="board-form" method="post" action="${pageContext.servletContext.contextPath }/board/modify">
 				<input type = "hidden" name = "a" value="modify">
 					<input type='hidden' name="no" value='${no }'>
 					<table class="tbl-ex">
@@ -44,7 +44,7 @@
 						</c:forEach>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.servletContext.contextPath }/board?a=list">취소</a>
+						<a href="${pageContext.servletContext.contextPath }/board/list">취소</a>
 						<input type="submit" value="수정">
 					</div>
 				</form>

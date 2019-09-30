@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-	<select id="getList" resultType="boardvo">
+
+	<select id="getlist" resultType="boardvo">
 		<![CDATA[
-		  select no,
-		         name,
-		         contents,
-		         date_format(reg_date, '%Y-%m-%d %h:%i:%s')
-	        from board	
-		order by reg_date desc;
+		  select a.no as no, a.title as title, b.name as name, a.hit as hit, a.reg_date as regDate, b.no as userNo, contents as content, g_no as gno, o_no as ono, depth 
+		    from board a, user b 
+           where a.user_no = b.no 
+		order by g_no desc, o_no asc
 		]]>
+	</select>
+	<select id="getList" parameterType="int" resultType="boardvo">
+	<![CDATA[
+		select a.no as no, a.title as title, b.name as name, a.hit as hit, a.reg_date as regDate, b.no as userNo, contents as content, g_no as gno, o_no as ono, depth 
+	      from board a, user b 
+		 where a.user_no = b.no 
+	  order by g_no desc, o_no asc 
+	     limit #{page},5
+	]]>
 	</select>
 
 	<select id="getList2" parameterType="long" resultType="boardvo">
@@ -37,6 +45,18 @@
 	]]>
 	</update>
 	
+	<update id="contentsupdate" parameterType="boardvo">
+	<![CDATA[ 
+	update board set title = #{title}, contents = #{content} where no=#{no}
+	]]>
+	</update>
+	
+	<update id="commentupdate" parameterType="int">
+	<![CDATA[ 
+	update board set o_no = o_no+1 where g_no = #{gNo} and o_no > 1
+	]]>
+	</update>
+	
 	<insert id="insert" parameterType="boardvo">
 		<![CDATA[
 		insert 
@@ -52,13 +72,34 @@
 		<![CDATA[
 		insert 
 		  into board 
-		values (null, #{title}, #{content}, 0, now(), #{gNo}, #{oNo + 1},
-		       #{depth},
+		values (null, #{title}, #{content}, 0, now(), #{gNo}, #{oNo}+1,
+		       #{depth}+1,
 		       (select no from user where no = #{userNo}) )
 		]]>
 		
 	</insert>
 	
+	<delete id="delete" parameterType="boardvo">
+		<![CDATA[
+		delete
+		  from board
+		 where no = #{no}
+		   and user_no= #{userNo}
+		]]>
+	</delete>
+	
+	<update id="deleteupdate" parameterType="boardvo">
+	<![CDATA[
+	update board set title = '삭제된 게시물입니다.' 
+	where (select count(*) from (select * from board where g_no = #{gNo}) a) > 1 and no = #{no}
+	]]>
+	</update>
+	
+	<select id="getcount" resultType="boardvo">
+	<![CDATA[
+	select * from board
+	]]>
+	</select>
 	
 	
 </mapper>

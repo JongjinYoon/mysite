@@ -23,7 +23,6 @@ public class ListAction implements Action {
 		HttpSession session = request.getSession();
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser !=null) {
-
 			Long no = authUser.getNo();
 			authUser = new UserDao().get(no);
 			request.setAttribute("authUser", authUser);
