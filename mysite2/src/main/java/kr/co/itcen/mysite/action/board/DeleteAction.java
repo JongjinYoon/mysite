@@ -44,7 +44,6 @@ public class DeleteAction implements Action {
 		}
 
 		WebUtils.redirect(request, response, request.getContextPath() + "/board?a=list");
-
 	}
 
 }
