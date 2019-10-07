@@ -60,7 +60,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if ("ADMIN".equals(role)) {
 				if (!"ADMIN".equals(authUser.getRole())) {
 					response.sendRedirect(request.getContextPath());
-					return true;
+					return false;
 				}
 			}
 		return true;
