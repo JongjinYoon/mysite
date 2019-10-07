@@ -30,14 +30,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//UserService userService = appCtxt.getBean(UserService.class);
 		UserVo authUser = userService.getUser(vo);
 		if(authUser == null) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+ "/user/login");
 			return false;
 		}
 		
 		//session 처리
 		HttpSession session = request.getSession();
 		session.setAttribute("authUser",authUser);
-		System.out.println(authUser);
+		//System.out.println(authUser);
 		
 		response.sendRedirect(request.getContextPath());
 		return false;//핸들러로 직접 갈 일이 없기 떄문에 뽈쓰를 준다

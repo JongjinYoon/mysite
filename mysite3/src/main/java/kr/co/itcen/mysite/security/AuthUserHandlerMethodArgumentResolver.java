@@ -35,7 +35,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 	public boolean supportsParameter(MethodParameter parameter) {
 		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
 
-		// @AuthUser가 없으면,
+		// @AuthUser가 없으면 실행안함
 		if (authUser == null) {
 			return false;
 		}

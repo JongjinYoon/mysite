@@ -16,7 +16,7 @@ import kr.co.itcen.mysite.security.AuthUser;
 import kr.co.itcen.mysite.service.UserService;
 import kr.co.itcen.mysite.vo.UserVo;
 
-@Auth
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -90,11 +90,10 @@ public class UserController {
 	//role=Auth.Role.ADMIN도 가능
 	@RequestMapping(value = "/update", method=RequestMethod.GET)
 	public String update(@AuthUser UserVo authUser, Model model) {
-		Long no = authUser.getNo();
-		System.out.println(authUser);
-		UserVo userVo = userService.getUser(no);
 		
-		model.addAttribute("vo", userVo);
+		authUser = userService.getUser(authUser.getNo());
+		UserVo userVo = userService.getUser(authUser.getNo());
+		model.addAttribute("vo",userVo);
 		return "user/update";
 	}
 	
