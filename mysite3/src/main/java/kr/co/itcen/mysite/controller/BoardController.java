@@ -23,16 +23,7 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String index(Model model) {
-		
-		List<BoardVo> list = boardService.getList(0);
-		model.addAttribute("list", list);
-
-		return "board/list";
-	}
-	
-	@RequestMapping(value = "/list/{page}", method = RequestMethod.GET)
+	@RequestMapping(value = { "/list", "/list/{page}" }, method = RequestMethod.GET)
 	public String index(@PathVariable("page") String page, Model model, HttpSession session) {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		int countPage = 5;
@@ -61,7 +52,7 @@ public class BoardController {
 		} else {
 			lastPage = (int) Math.floor(total / countPage) + 1;
 		}
-		
+
 		List<BoardVo> list = boardService.getList((curPage - 1) * 5);
 
 		model.addAttribute("authUser", authUser);
@@ -77,7 +68,8 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/view/{no}/{curPage}", method = RequestMethod.GET)
-	public String view(@PathVariable("no") Long no,@PathVariable("curPage") int curPage, HttpSession session, Model model) {
+	public String view(@PathVariable("no") Long no, @PathVariable("curPage") int curPage, HttpSession session,
+			Model model) {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		model.addAttribute("authUser", authUser);
 		boardService.update(no);
@@ -124,7 +116,7 @@ public class BoardController {
 		vo.setUserNo(authUser.getNo());
 		int count = 0;
 		List<BoardVo> list = boardService.getList();
-		
+
 		for (int i = 0; i < list.size(); i++) {
 			if (vo.getgNo().equals(list.get(i).getgNo())) {
 				count++;
@@ -137,7 +129,7 @@ public class BoardController {
 		}
 		return "redirect:/board/list/1";
 	}
-	
+
 	@RequestMapping(value = "/modify/{no}", method = RequestMethod.GET)
 	public String modify(@PathVariable("no") Long no, Model model) {
 		List<BoardVo> list = boardService.getList();
@@ -145,7 +137,7 @@ public class BoardController {
 		model.addAttribute("no", no);
 		return "board/modify";
 	}
-	
+
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(@ModelAttribute BoardVo vo) {
 		boardService.update(vo);
