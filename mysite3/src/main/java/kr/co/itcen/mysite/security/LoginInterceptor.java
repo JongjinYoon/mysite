@@ -37,6 +37,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//session 처리
 		HttpSession session = request.getSession();
 		session.setAttribute("authUser",authUser);
+		System.out.println(authUser);
+		
 		response.sendRedirect(request.getContextPath());
 		return false;//핸들러로 직접 갈 일이 없기 떄문에 뽈쓰를 준다
 	}

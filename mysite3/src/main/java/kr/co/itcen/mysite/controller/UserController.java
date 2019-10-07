@@ -1,7 +1,5 @@
 package kr.co.itcen.mysite.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -9,14 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.itcen.mysite.security.Auth;
+import kr.co.itcen.mysite.security.AuthUser;
 import kr.co.itcen.mysite.service.UserService;
 import kr.co.itcen.mysite.vo.UserVo;
 
+@Auth
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -76,12 +76,25 @@ public class UserController {
 //		return "redirect:/";
 //	}
 	
+//	@RequestMapping(value = "/update", method=RequestMethod.GET)
+//	public String update(HttpSession session, Model model) {
+//		UserVo authUser = (UserVo) session.getAttribute("authUser");
+//		UserVo userVo = userService.getUser(authUser.getNo());
+//
+//		model.addAttribute("vo",userVo);
+//		return "user/update";
+//	}
+	
+	@Auth("USER")
+	//디폴트값이 유저지만 그냥 명시한거임 값이 두개이상일때 파라미터 명시 value만 생략가능 value말고 딴이름 쓰면 명시해야됨
+	//role=Auth.Role.ADMIN도 가능
 	@RequestMapping(value = "/update", method=RequestMethod.GET)
-	public String update(HttpSession session, Model model) {
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		UserVo userVo = userService.getUser(authUser.getNo());
-
-		model.addAttribute("vo",userVo);
+	public String update(@AuthUser UserVo authUser, Model model) {
+		Long no = authUser.getNo();
+		System.out.println(authUser);
+		UserVo userVo = userService.getUser(no);
+		
+		model.addAttribute("vo", userVo);
 		return "user/update";
 	}
 	
