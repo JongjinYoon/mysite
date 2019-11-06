@@ -19,7 +19,7 @@
 		});
 		var $btnCheckEmail = $("#btn-check-email");
 		$btnCheckEmail.click(function() {
-			var email = $("#input-email").val();
+			var email = $("#input-email").val(); // input은 val로 값을 가져 올 수 있다.
 			console.log(email);
 			if (email == "") {
 				return;

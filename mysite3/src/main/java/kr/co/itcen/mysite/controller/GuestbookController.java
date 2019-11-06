@@ -44,4 +44,9 @@ public class GuestbookController {
 		guestbookService.insert(vo);
 		return "redirect:/guestbook/list";
 	}
+	
+	@RequestMapping(value="/spa", method=RequestMethod.GET)
+	public String spa() {
+		return "guestbook/index-spa";
+	}
 }
